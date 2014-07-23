@@ -10,7 +10,7 @@
 #include "Mob.h"
 #include "Player.h"
 #include "ObjectList.h"
-#include "ClassType.h"
+#include "Quest.h"
 
 class OverWorld
 {
@@ -18,6 +18,7 @@ private:
     Player* m_player;
     void loadSkill();
     void loadItem();
+    void loadQuest();
 public:
     OverWorld();
     ~OverWorld();

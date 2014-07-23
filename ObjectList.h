@@ -5,12 +5,14 @@
 
 #include "Skill.h"
 #include "Item.h"
+#include "Quest.h"
 
 class ObjectList
 {
 public:
     static std::vector<Skill> lSkill;
     static std::vector<Item*> lItem;
+    static std::vector<Quest*> lQuest;
 };
 
 #endif // OBJECTLIST_H_INCLUDED

@@ -6,7 +6,7 @@ Player::Player( std::string name, Statistic stat, ClassType classType )
     : Character(name, stat), m_classType(classType)
 {
     for( int i = 0; i < LENGTH_ITEM; ++i )
-        m_stuff[i] = 0;
+        this->m_stuff[i] = 0;
 }
 
 Player::~Player()

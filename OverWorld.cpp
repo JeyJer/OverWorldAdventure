@@ -47,7 +47,7 @@ OverWorld::OverWorld()
 
     this->loadSkill();
     this->loadItem();
-
+    this->loadQuest();
 
     if( classChoice == 1 )
     {
@@ -93,49 +93,83 @@ void OverWorld::loadSkill()
 void OverWorld::loadItem()
 {
     // WARRIOR ITEM
-    ObjectList::lItem.push_back(
+    ObjectList::lItem.push_back
+    (
         new Item(0, "Tete de Grizzly Supersonic", WARRIOR, HELMET, {20,0,3,2,0,5})
     );
-    ObjectList::lItem.push_back(
+    ObjectList::lItem.push_back
+    (
         new Item(1, "Cuirasse de Fulgrad Demoniaque", WARRIOR, ARMOR, {30,0,0,20,0,10})
     );
-    ObjectList::lItem.push_back(
+    ObjectList::lItem.push_back
+    (
         new Item(2, "Solerets du Seigneur de Guerre", WARRIOR, BOOTS, {20,0,3,4,0,2})
     );
-    ObjectList::lItem.push_back(
+    ObjectList::lItem.push_back
+    (
         new Item(3, "Bouclier en peau de Tank", WARRIOR, LEFT, {30,0,0,30,0,15})
     );
-    ObjectList::lItem.push_back(
+    ObjectList::lItem.push_back
+    (
         new Item(4, "Double Masse d'Arme de la Mort", WARRIOR, RIGHT, {0,0,14,0,0,0})
     );
-    ObjectList::lItem.push_back(
+    ObjectList::lItem.push_back
+    (
         new Item(5, "Bague de l'Immortel", WARRIOR, RING, {150,0,0,2,0,4})
     );
-    ObjectList::lItem.push_back(
+    ObjectList::lItem.push_back
+    (
         new Item(6, "Amulette de Bellesetpute", WARRIOR, AMULET, {150,0,0,2,0,4})
     );
 
     // MAGICIAN ITEM
-    ObjectList::lItem.push_back(
+    ObjectList::lItem.push_back
+    (
         new Item(7, "Coiffe des tempetes", MAGICIAN, HELMET, {40,100,0,10,0,20})
     );
-    ObjectList::lItem.push_back(
+    ObjectList::lItem.push_back
+    (
         new Item(8, "Cape du Chaos Endless", MAGICIAN, ARMOR, {60,100,0,15,0,30})
     );
-    ObjectList::lItem.push_back(
+    ObjectList::lItem.push_back
+    (
         new Item(9, "Chaussons en poils de couilles", MAGICIAN, BOOTS, {30,100,0,5,5,15})
     );
-    ObjectList::lItem.push_back(
+    ObjectList::lItem.push_back
+    (
         new Item(10, "Grimoire des Abysses Universelles", MAGICIAN, LEFT, {30,100,0,10,10,25})
     );
-    ObjectList::lItem.push_back(
+    ObjectList::lItem.push_back
+    (
         new Item(11, "Scepte de quietude inquietant", MAGICIAN, RIGHT, {0,100,0,0,25,0})
     );
-    ObjectList::lItem.push_back(
+    ObjectList::lItem.push_back
+    (
         new Item(12, "Anneau du $vv@gg <3 <3 LOVE", MAGICIAN, RING, {70,100,0,5,5,10})
     );
-    ObjectList::lItem.push_back(
+    ObjectList::lItem.push_back
+    (
         new Item(13, "Collier Maudit du Black Pearl", MAGICIAN, AMULET, {70,100,0,5,5,10})
+    );
+}
+
+void OverWorld::loadQuest()
+{
+    ObjectList::lQuest.push_back
+    (
+        new Quest( "Bonjour aventurier !! Pourrais-tu tuer Machin Le Trucmuche ?",
+                  "Tuez Machin Le Trucmuche.", "Merci d'avoir tue Machin Le Trucmuche !!",
+                  {ATTACK,20}, {KILL_MOB,0}
+        )
+    );
+    ObjectList::lQuest.push_back
+    (
+        new Quest( "Bonjour aventurier !! Tu n'auras jamais plus de PV que 101 !",
+                  "Avoir plus de 100PV.", "Je m'incline... Tu as plus de vie que moi..."
+                  "Pour la peine, laisse-moi t'offrir le reste de ma vie... *l'Homme meurt"
+                  "en vous laissant aspirer ses 150 points de vitalite..." ,
+                  {LIFE,150}, {MORE_LIFE,0}
+        )
     );
 }
 
