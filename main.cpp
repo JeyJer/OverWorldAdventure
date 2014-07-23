@@ -10,7 +10,9 @@ int main()
     do{
         do
         {
-            std::cout << "1. Nouvelle partie\n2. Quitter\n\n";
+            std::cout << "Faites 1 puis faites entrer (fais pas 2 abruti!!)\n" <<
+                "\t1. Nouvelle partie\n" <<
+                "\t2. Quitter\n";
             std::cin >> choice;
 
             if( choice != 1 && choice != 2 )
