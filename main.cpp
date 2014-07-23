@@ -2,6 +2,12 @@
 
 #include "OverWorld.h"
 
+/** ATTENTION !!
+  * Ce projet n'est pas un projet sérieux. Le programme ne cherche pas forcément
+  * à être à la pointe de l'optimisation, et les pratiques utilisées ne sont pas
+  * toujours les meilleures. Il s'agit essentiellement d'un projet de test.
+  **/
+
 int main()
 {
     std::cout << "\t\tBienvenue sur le jeu de ouf OverWorld Adventure\n" << std::endl;
