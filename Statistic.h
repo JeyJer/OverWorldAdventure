@@ -1,3 +1,6 @@
+#ifndef STATISTIC_H_INCLUDED
+#define STATISTIC_H_INCLUDED
+
 struct Statistic
 {
     int life;
@@ -7,3 +10,5 @@ struct Statistic
     int magicalAtt;
     int magicalDef;
 };
+
+#endif // STATISTIC_H_INCLUDED
