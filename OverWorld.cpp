@@ -33,7 +33,7 @@ OverWorld::OverWorld()
 
         case MAGICIAN :
             stat.life = 75;
-            stat.mana = 200;
+            stat.mana = 2000;
             stat.physicalAtt = 0;
             stat.physicalDef = 40;
             stat.magicalAtt = 40;
@@ -45,13 +45,39 @@ OverWorld::OverWorld()
             std::exit(0);
     }
 
-    m_player = new Player( name, stat, ((classChoice==1)?WARRIOR:MAGICIAN) );
+    // load skills
+    this->loadSkill();
+
+
+    if( classChoice == 1 )
+    {
+        m_player = new Player( name, stat, WARRIOR );
+        m_player->addSkill(0);
+    }
+    else if( classChoice == 2 )
+    {
+        m_player = new Player( name, stat, MAGICIAN );
+        m_player->addSkill(1);
+        m_player->addSkill(2);
+    }
+    else
+    {
+        std::cout << "ULTRA FATAL ERROR DE CLASSE..." << classChoice;
+        std::exit(5);
+    }
 }
 
 OverWorld::~OverWorld()
 {
     delete m_player;
     m_player = 0;
+}
+
+void OverWorld::loadSkill()
+{
+    ObjectList::lSkill.push_back( Skill(0, "Fracasse-Crane", WARRIOR, MAG_ATT, 5) );
+    ObjectList::lSkill.push_back( Skill(1, "Colere de tempete", MAGICIAN, MAG_ATT, 10) );
+    ObjectList::lSkill.push_back( Skill(2, "Ferveur de soin", MAGICIAN, HEAL, 20) );
 }
 
 void OverWorld::run()
@@ -63,9 +89,9 @@ void OverWorld::run()
         std::cout << "\nQue voulez-vous faire ?\n" <<
             "\t1. Se promener dans les bois (et t aC con pr y aler tt seul? bouffooooonn),\n" <<
             "\t2. Consulter l'etat de son personnage,\n" <<
-            "\t3. Voir ses competences,\n" <<
-            "\t4. Examiner son stuff,\n" <<
-            "\t5. Lire son journal de quete,\n" <<
+            "\t3. Voir ses competences d'etalon,\n" <<
+            "\t4. Examiner son stuff totalement mouteki,\n" <<
+            "\t5. Lire son journal de quete en reliure rose bonbon trop pimp,\n" <<
             "\t6. Chanter une chanson d'amour,\n" <<
             "\t7. Donner son avis sur la pornolitique,\n" <<
             "\t8. Quitter cette aventure epic qui m'a beaucoup distrait je l'avoue.\n";
@@ -74,7 +100,7 @@ void OverWorld::run()
 
         if( action < 1 || action > 8 )
         {
-            std::cout << "Veuillez choisir un nombre entre 1 et 7.";
+            std::cout << "Veuillez choisir un nombre entre 1 et 8, fils de pute, cordialement.";
         }
         else
         {

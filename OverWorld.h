@@ -4,15 +4,19 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
+#include <vector>
 
 #include "Character.h"
 #include "Mob.h"
 #include "Player.h"
+#include "ObjectList.h"
+#include "ClassType.h"
 
 class OverWorld
 {
 private:
     Player* m_player;
+    void loadSkill();
 public:
     OverWorld();
     ~OverWorld();

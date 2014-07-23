@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "Statistic.cpp"
+#include "Statistic.h"
 
 class Character
 {
@@ -13,6 +13,7 @@ protected:
 public:
     Character( std::string name, Statistic m_stat );
     virtual ~Character();
+    virtual void addSkill(int id) = 0;
 };
 
 #endif // CHARACTER_H_INCLUDED

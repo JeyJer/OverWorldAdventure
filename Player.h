@@ -7,7 +7,7 @@
 #include "Character.h"
 #include "Skill.h"
 #include "Item.h"
-#include "ClassType.cpp"
+#include "ClassType.h"
 
 class Player : public Character
 {
@@ -20,6 +20,7 @@ private:
 public:
     Player( std::string name, Statistic stat, ClassType classType );
     ~Player();
+    void addSkill(int id);
     void showState() const;
     void dispSkills() const;
     void dispStuff() const;
