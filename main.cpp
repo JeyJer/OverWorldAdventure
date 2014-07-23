@@ -37,7 +37,8 @@ int main()
                 return 0;
 
             default :
-                std::cout << "Choix inconnu...\n";
+                std::cout << "Choix inconnu... Votre ordinateur va s'auto-exploser...\n";
+                std::exit(0);
                 return 0;
         }
     } while( true );
