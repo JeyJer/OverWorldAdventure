@@ -11,6 +11,8 @@ enum RewardType
 
 struct Reward
 {
+    Reward( RewardType rwdTp, int val )
+        : rewardType( rwdTp ), value( val ) {}
     RewardType rewardType;
     int value; // id or amount
 };

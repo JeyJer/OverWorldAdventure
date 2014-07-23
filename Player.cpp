@@ -24,7 +24,7 @@ void Player::addSkill(int id)
 void Player::wearStuff(int id)
 {
     Item* item = ObjectList::lItem.at(id);
-    if( ObjectList::lItem.at(id)->getClassType() != this->m_classType )
+    if( this->canWearItem(id) )
     {
         std::cout << "ULTRA FATAL MEGA OUTPUT ERROR OF APOCALYPSE !!!!!! " <<
             ObjectList::lItem.at(id)->getClassType() << " != " << this->m_classType;
@@ -70,6 +70,11 @@ void Player::wearStuff(int id)
     }
 }
 
+bool Player::canWearItem(int id)
+{
+    return (ObjectList::lItem.at(id)->getClassType() != this->m_classType);
+}
+
 void Player::addStat(Item* item)
 {
     this->m_stat.life += item->getStat().life;
@@ -88,6 +93,71 @@ void Player::removeStat(Item* item)
     this->m_stat.physicalDef -= item->getStat().physicalDef;
     this->m_stat.magicalAtt -= item->getStat().magicalAtt;
     this->m_stat.magicalDef -= item->getStat().magicalDef;
+}
+
+void Player::addQuest(Quest* quest)
+{
+    this->m_lQuestCurrent.push_back( quest );
+    std::cout << "\nNouvelle quete debutee!!\n";
+}
+
+void Player::finishQuest(Quest* quest)
+{
+    bool found = false;
+    for( unsigned int i = 0; i < this->m_lQuestCurrent.size(); ++i )
+    {
+        if( this->m_lQuestCurrent.at(i)->getId() == quest->getId() )
+        {
+            found = true;
+            this->m_lQuestCurrent.erase( m_lQuestCurrent.begin() + i);
+            break;
+        }
+    }
+
+    if( !found )
+    {
+        std::cout << "Oh putain mon fucking soft marche pas... "
+            "Ca va chier... ### ? " << quest->getId();
+            std::exit( 13 );
+    }
+
+    this->getQuestReward( quest );
+
+}
+
+void Player::getQuestReward(Quest* quest)
+{
+    switch( quest->getReward().rewardType )
+    {
+        case LIFE :
+            this->m_stat.life += quest->getReward().value;
+            break;
+
+        case ATTACK :
+            this->m_stat.magicalAtt += quest->getReward().value;
+            this->m_stat.physicalAtt += quest->getReward().value;
+            break;
+
+        case DEFENSE :
+            this->m_stat.magicalDef += quest->getReward().value;
+            this->m_stat.physicalDef += quest->getReward().value;
+            break;
+
+        case ITEM :
+            if( !canWearItem(quest->getReward().value) )
+            {
+                this->wearStuff(quest->getReward().value+7);
+            }
+            else
+            {
+                this->wearStuff(quest->getReward().value);
+            }
+            break;
+
+        default:
+            std::cout << "Could god save the america...";
+            std::exit( 14 );
+    }
 }
 
 void Player::showState() const
@@ -125,12 +195,12 @@ Item** Player::getStuff()
     return this->m_stuff;
 }
 
-std::vector<int> Player::getListQuestCurrent()
+std::vector<Quest*> Player::getListQuestCurrent()
 {
     return this->m_lQuestCurrent;
 }
 
-std::vector<int> Player::getListQuestFinished()
+std::vector<Quest*> Player::getListQuestFinished()
 {
     return this->m_lQuestFinished;
 }

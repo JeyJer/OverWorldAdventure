@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "Character.h"
+#include "Quest.h"
 #include "Skill.h"
 #include "Item.h"
 #include "ClassType.h"
@@ -17,22 +18,26 @@ private:
     ClassType m_classType;
     Item* m_stuff[7];
     std::vector<int> m_lSkill;
-    std::vector<int> m_lQuestCurrent;
-    std::vector<int> m_lQuestFinished;
+    std::vector<Quest*> m_lQuestCurrent;
+    std::vector<Quest*> m_lQuestFinished;
+    void getQuestReward(Quest* quest);
+    void addStat(Item* item);
+    void removeStat(Item* item);
 public:
     Player( std::string name, Statistic stat, ClassType classType );
     ~Player();
     void addSkill(int id);
     void wearStuff(int id);
-    void addStat(Item* item);
-    void removeStat(Item* item);
+    bool canWearItem(int id);
+    void addQuest(Quest* quest);
+    void finishQuest(Quest* quest);
     void showState() const;
     void dispSkills() const;
     void dispStuff() const;
     void dispQuestJournal() const;
     Item** getStuff();
-    std::vector<int> getListQuestCurrent();
-    std::vector<int> getListQuestFinished();
+    std::vector<Quest*> getListQuestCurrent();
+    std::vector<Quest*> getListQuestFinished();
     std::vector<int> getListSkill();
 };
 

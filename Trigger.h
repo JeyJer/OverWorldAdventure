@@ -10,6 +10,8 @@ enum Action
 
 struct Trigger
 {
+    Trigger( Action act, int val )
+        : action( act ), value( val ) {}
     Action action;
     int value; // id or amount
 };

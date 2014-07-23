@@ -9,14 +9,16 @@
 class Quest
 {
 private:
+    int m_id;
     std::string m_intro;
     std::string m_sumUp;
     std::string m_endUp;
     Reward m_reward;
     Trigger m_trigger;
 public:
-    Quest( std::string intro, std::string sumUp, std::string endUp, Reward reward, Trigger trigger );
+    Quest( int id, std::string intro, std::string sumUp, std::string endUp, Reward reward, Trigger trigger );
     ~Quest();
+    int getId();
     std::string getIntro();
     std::string getSumUp();
     std::string getEndUp();

@@ -65,16 +65,6 @@ OverWorld::OverWorld()
         std::cout << "ULTRA FATAL ERROR DE CLASSE..." << classChoice;
         std::exit(5);
     }
-
-    // ############# TEST LINEEEEEEEEEEEEEEE ##
-    m_player->wearStuff( 7 );
-    m_player->wearStuff( 8 );
-    m_player->wearStuff( 9 );
-    m_player->wearStuff( 10 );
-    m_player->wearStuff( 11 );
-    m_player->wearStuff( 12 );
-    m_player->wearStuff( 13 );
-    m_player->wearStuff( 13 );
 }
 
 OverWorld::~OverWorld()
@@ -157,18 +147,18 @@ void OverWorld::loadQuest()
 {
     ObjectList::lQuest.push_back
     (
-        new Quest( "Bonjour aventurier !! Pourrais-tu tuer Machin Le Trucmuche ?",
+        new Quest( 0, "Bonjour aventurier !! Pourrais-tu tuer Machin Le Trucmuche ?",
                   "Tuez Machin Le Trucmuche.", "Merci d'avoir tue Machin Le Trucmuche !!",
-                  {ATTACK,20}, {KILL_MOB,0}
+                  Reward(ATTACK,20), Trigger(KILL_MOB,0)
         )
     );
     ObjectList::lQuest.push_back
     (
-        new Quest( "Bonjour aventurier !! Tu n'auras jamais plus de PV que 101 !",
+        new Quest( 1, "Bonjour aventurier !! Tu n'auras jamais plus de PV que 101 !",
                   "Avoir plus de 100PV.", "Je m'incline... Tu as plus de vie que moi..."
                   "Pour la peine, laisse-moi t'offrir le reste de ma vie... *l'Homme meurt"
                   "en vous laissant aspirer ses 150 points de vitalite..." ,
-                  {LIFE,150}, {MORE_LIFE,0}
+                  Reward(LIFE,150), Trigger(MORE_LIFE,0)
         )
     );
 }

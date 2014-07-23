@@ -1,12 +1,17 @@
 #include "Quest.h"
 
-Quest::Quest( std::string intro, std::string sumUp, std::string endUp, Reward reward, Trigger trigger )
-    : m_intro( intro ), m_sumUp( sumUp ), m_endUp( endUp ), m_reward( reward ), m_trigger( trigger )
+Quest::Quest( int id, std::string intro, std::string sumUp, std::string endUp, Reward reward, Trigger trigger )
+    : m_id( id ), m_intro( intro ), m_sumUp( sumUp ), m_endUp( endUp ), m_reward( reward ), m_trigger( trigger )
 {
 }
 
 Quest::~Quest()
 {
+}
+
+int Quest::getId()
+{
+    return this->m_id;
 }
 
 std::string Quest::getIntro()
