@@ -1,6 +1,7 @@
 #ifndef PLAYER_H_INCLUDED
 #define PLAYER_H_INCLUDED
 
+#include <iostream>
 #include <vector>
 
 #include "Character.h"
@@ -19,6 +20,10 @@ private:
 public:
     Player( std::string name, Statistic stat, ClassType classType );
     ~Player();
+    void showState() const;
+    void dispSkills() const;
+    void dispStuff() const;
+    void dispQuestJournal() const;
     Item** getStuff();
     std::vector<int> getListQuestCurrent();
     std::vector<int> getListQuestFinished();
