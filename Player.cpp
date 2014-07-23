@@ -38,12 +38,12 @@ void Player::wearStuff(int id)
     }
     else
     {
-        std::cout << "\nVous portez déjà un item.\n\n" <<
+        std::cout << "\nVous portez deja un item.\n\n" <<
             "Item porte :\n" << m_stuff[item->getTypeItem()]->disp() <<
-            "\nItem propose :\n" << item->disp() << '\n';
+            "\n\nItem propose :\n" << item->disp() << '\n';
 
         std::cout << "\nVoulez-vous changer d'item ?\n"
-            "\t1. Oui --> l'item que vous portez actuellement sera détruit.\n" <<
+            "\t1. Oui --> l'item que vous portez actuellement sera detruit.\n" <<
             "\t2. Non --> l'item propose sera detruit.\n";
 
         int choice;
@@ -61,7 +61,7 @@ void Player::wearStuff(int id)
             this->removeStat( m_stuff[item->getTypeItem()] );
             this->addStat( item );
             m_stuff[item->getTypeItem()] = item;
-            std::cout << "\nFelicitation! Vous portez désormais un nouvel item!\n";
+            std::cout << "\nFelicitation! Vous portez desormais un nouvel item!\n";
         }
         else
         {
