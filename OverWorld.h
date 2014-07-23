@@ -17,6 +17,7 @@ class OverWorld
 private:
     Player* m_player;
     void loadSkill();
+    void loadItem();
 public:
     OverWorld();
     ~OverWorld();

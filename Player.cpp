@@ -5,6 +5,8 @@
 Player::Player( std::string name, Statistic stat, ClassType classType )
     : Character(name, stat), m_classType(classType)
 {
+    for( int i = 0; i < LENGTH_ITEM; ++i )
+        m_stuff[i] = 0;
 }
 
 Player::~Player()
@@ -19,6 +21,75 @@ void Player::addSkill(int id)
         ObjectList::lSkill.at(id).getName() << ".\n";
 }
 
+void Player::wearStuff(int id)
+{
+    Item* item = ObjectList::lItem.at(id);
+    if( ObjectList::lItem.at(id)->getClassType() != this->m_classType )
+    {
+        std::cout << "ULTRA FATAL MEGA OUTPUT ERROR OF APOCALYPSE !!!!!! " <<
+            ObjectList::lItem.at(id)->getClassType() << " != " << this->m_classType;
+        std::exit(11);
+    }
+    else if( m_stuff[item->getTypeItem()] == 0 )
+    {
+        std::cout << "\nVous portez desormais l'item suivant : " << item->getName() << '\n';
+        this->addStat( item );
+        m_stuff[item->getTypeItem()] = item;
+    }
+    else
+    {
+        std::cout << "\nVous portez déjà un item.\n\n" <<
+            "Item porte :\n" << m_stuff[item->getTypeItem()]->disp() <<
+            "\nItem propose :\n" << item->disp() << '\n';
+
+        std::cout << "\nVoulez-vous changer d'item ?\n"
+            "\t1. Oui --> l'item que vous portez actuellement sera détruit.\n" <<
+            "\t2. Non --> l'item propose sera detruit.\n";
+
+        int choice;
+        do
+        {
+            std::cin >> choice;
+
+            if( choice != 1 && choice != 2 )
+                std::cout << "\nVeuillez choisir le choix 1 ou 2.\n";
+
+        } while( choice != 1 && choice != 2 );
+
+        if( choice == 1 )
+        {
+            this->removeStat( m_stuff[item->getTypeItem()] );
+            this->addStat( item );
+            m_stuff[item->getTypeItem()] = item;
+            std::cout << "\nFelicitation! Vous portez désormais un nouvel item!\n";
+        }
+        else
+        {
+            std::cout << "\nVous conservez votre item actuel\n";
+        }
+    }
+}
+
+void Player::addStat(Item* item)
+{
+    this->m_stat.life += item->getStat().life;
+    this->m_stat.mana += item->getStat().mana;
+    this->m_stat.physicalAtt += item->getStat().physicalAtt;
+    this->m_stat.physicalDef += item->getStat().physicalDef;
+    this->m_stat.magicalAtt += item->getStat().magicalAtt;
+    this->m_stat.magicalDef += item->getStat().magicalDef;
+}
+
+void Player::removeStat(Item* item)
+{
+    this->m_stat.life -= item->getStat().life;
+    this->m_stat.mana -= item->getStat().mana;
+    this->m_stat.physicalAtt -= item->getStat().physicalAtt;
+    this->m_stat.physicalDef -= item->getStat().physicalDef;
+    this->m_stat.magicalAtt -= item->getStat().magicalAtt;
+    this->m_stat.magicalDef -= item->getStat().magicalDef;
+}
+
 void Player::showState() const
 {
     std::cout << "\nJe m'appelle " << this->m_name << ", je suis un " <<
@@ -29,17 +100,19 @@ void Player::showState() const
 
 void Player::dispSkills() const
 {
-    std::cout << "\nSorts :\n";
+    std::cout << "\nSorts :";
     for( unsigned int i = 0; i < this->m_lSkill.size(); ++i )
     {
-        std::cout << '\t' << ObjectList::lSkill.at( this->m_lSkill.at(i) ).disp();
+        std::cout << "\n\t" << ObjectList::lSkill.at( this->m_lSkill.at(i) ).disp();
     }
     std::cout << '\n';
 }
 
 void Player::dispStuff() const
 {
-
+    std::cout << "\nItems portes : \n";
+    for( int i = 0; i < LENGTH_ITEM; ++i )
+        std::cout << '\n' << this->m_stuff[i]->disp() << '\n';
 }
 
 void Player::dispQuestJournal() const

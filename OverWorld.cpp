@@ -33,7 +33,7 @@ OverWorld::OverWorld()
 
         case MAGICIAN :
             stat.life = 75;
-            stat.mana = 2000;
+            stat.mana = 700;
             stat.physicalAtt = 0;
             stat.physicalDef = 40;
             stat.magicalAtt = 40;
@@ -45,8 +45,8 @@ OverWorld::OverWorld()
             std::exit(0);
     }
 
-    // load skills
     this->loadSkill();
+    this->loadItem();
 
 
     if( classChoice == 1 )
@@ -65,6 +65,16 @@ OverWorld::OverWorld()
         std::cout << "ULTRA FATAL ERROR DE CLASSE..." << classChoice;
         std::exit(5);
     }
+
+    // ############# TEST LINEEEEEEEEEEEEEEE ##
+    m_player->wearStuff( 7 );
+    m_player->wearStuff( 8 );
+    m_player->wearStuff( 9 );
+    m_player->wearStuff( 10 );
+    m_player->wearStuff( 11 );
+    m_player->wearStuff( 12 );
+    m_player->wearStuff( 13 );
+    m_player->wearStuff( 13 );
 }
 
 OverWorld::~OverWorld()
@@ -78,6 +88,55 @@ void OverWorld::loadSkill()
     ObjectList::lSkill.push_back( Skill(0, "Fracasse-Crane", WARRIOR, MAG_ATT, 5) );
     ObjectList::lSkill.push_back( Skill(1, "Colere de tempete", MAGICIAN, MAG_ATT, 10) );
     ObjectList::lSkill.push_back( Skill(2, "Ferveur de soin", MAGICIAN, HEAL, 20) );
+}
+
+void OverWorld::loadItem()
+{
+    // WARRIOR ITEM
+    ObjectList::lItem.push_back(
+        new Item(0, "Tete de Grizzly Supersonic", WARRIOR, HELMET, {20,0,3,2,0,5})
+    );
+    ObjectList::lItem.push_back(
+        new Item(1, "Cuirasse de Fulgrad Demoniaque", WARRIOR, ARMOR, {30,0,0,20,0,10})
+    );
+    ObjectList::lItem.push_back(
+        new Item(2, "Solerets du Seigneur de Guerre", WARRIOR, BOOTS, {20,0,3,4,0,2})
+    );
+    ObjectList::lItem.push_back(
+        new Item(3, "Bouclier en peau de Tank", WARRIOR, LEFT, {30,0,0,30,0,15})
+    );
+    ObjectList::lItem.push_back(
+        new Item(4, "Double Masse d'Arme de la Mort", WARRIOR, RIGHT, {0,0,14,0,0,0})
+    );
+    ObjectList::lItem.push_back(
+        new Item(5, "Bague de l'Immortel", WARRIOR, RING, {150,0,0,2,0,4})
+    );
+    ObjectList::lItem.push_back(
+        new Item(6, "Amulette de Bellesetpute", WARRIOR, AMULET, {150,0,0,2,0,4})
+    );
+
+    // MAGICIAN ITEM
+    ObjectList::lItem.push_back(
+        new Item(7, "Coiffe des tempetes", MAGICIAN, HELMET, {40,100,0,10,0,20})
+    );
+    ObjectList::lItem.push_back(
+        new Item(8, "Cape du Chaos Endless", MAGICIAN, ARMOR, {60,100,0,15,0,30})
+    );
+    ObjectList::lItem.push_back(
+        new Item(9, "Chaussons en poils de couilles", MAGICIAN, BOOTS, {30,100,0,5,5,15})
+    );
+    ObjectList::lItem.push_back(
+        new Item(10, "Grimoire des Abysses Universelles", MAGICIAN, LEFT, {30,100,0,10,10,25})
+    );
+    ObjectList::lItem.push_back(
+        new Item(11, "Scepte de quietude inquietant", MAGICIAN, RIGHT, {0,100,0,0,25,0})
+    );
+    ObjectList::lItem.push_back(
+        new Item(12, "Anneau du $vv@gg <3 <3 LOVE", MAGICIAN, RING, {70,100,0,5,5,10})
+    );
+    ObjectList::lItem.push_back(
+        new Item(13, "Collier Maudit du Black Pearl", MAGICIAN, AMULET, {70,100,0,5,5,10})
+    );
 }
 
 void OverWorld::run()

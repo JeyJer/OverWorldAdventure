@@ -4,11 +4,13 @@
 #include <vector>
 
 #include "Skill.h"
+#include "Item.h"
 
 class ObjectList
 {
 public:
     static std::vector<Skill> lSkill;
+    static std::vector<Item*> lItem;
 };
 
 #endif // OBJECTLIST_H_INCLUDED
