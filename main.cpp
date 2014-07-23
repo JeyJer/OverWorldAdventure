@@ -26,9 +26,11 @@ int main()
                 ow->run();
                 break;
             }
+
             case 2 :
-                std::cout << "Merci d'avoir joué sur OverWorld Adventure!!\n";
+                std::cout << "Merci d'avoir joue sur OverWorld Adventure!!\n";
                 return 0;
+
             default :
                 std::cout << "Choix inconnu...\n";
                 return 0;
