@@ -7,7 +7,8 @@ int main()
     std::cout << "\t\tBienvenue sur le jeu de ouf OverWorld Adventure\n" << std::endl;
 
     int choice;
-    do{
+    do
+    {
         do
         {
             std::cout << "Faites 1 puis faites entrer (fais pas 2 abruti!!)\n" <<
@@ -26,6 +27,8 @@ int main()
             {
                 OverWorld* ow = new OverWorld;
                 ow->run();
+                delete ow;
+                ow = 0;
                 break;
             }
 
