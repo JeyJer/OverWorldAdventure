@@ -5,10 +5,7 @@
 #include <iomanip>
 #include <cstdlib>
 
-#include "Statistic.h"
-#include "ClassType.h"
-#include "TypeItem.h"
-#include "Utils.h"
+
 
 class Item
 {

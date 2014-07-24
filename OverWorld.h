@@ -6,11 +6,17 @@
 #include <cstdlib>
 #include <vector>
 
-#include "Mob.h"
-#include "Player.h"
+#include "Statistic.h"
+#include "ClassType.h"
+#include "SkillEffect.h"
+#include "Reward.h"
+#include "Trigger.h"
 #include "ObjectList.h"
-#include "Character.h"
-#include "Quest.h"
+
+class Player;
+class Skill;
+class Item;
+class Quest;
 
 class OverWorld
 {

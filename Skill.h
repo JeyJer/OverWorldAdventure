@@ -5,8 +5,7 @@
 #include <string>
 #include <sstream>
 
-#include "ClassType.h"
-#include "SkillEffect.h"
+
 
 class Skill
 {

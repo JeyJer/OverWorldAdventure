@@ -4,8 +4,6 @@
 #include <string>
 #include <cstdlib>
 
-#include "Statistic.h"
-#include "ObjectList.h"
 
 class Character
 {

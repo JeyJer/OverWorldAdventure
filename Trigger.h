@@ -4,8 +4,6 @@
 #include <iostream>
 #include <cstdlib>
 
-#include "Utils.h"
-
 enum Action
 {
     KILL_MOB = 0,

@@ -5,8 +5,11 @@
 #include <ctime>
 #include <iostream>
 
-#include "Player.h"
-#include "Mob.h"
+#include "ClassType.h"
+#include "ObjectList.h"
+
+class Player;
+class Mob;
 
 void nextRide(Player* player);
 int getRandomNumber(int minimum, int maximum);

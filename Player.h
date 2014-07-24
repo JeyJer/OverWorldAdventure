@@ -6,11 +6,7 @@
 
 #define LENGTH_ITEM 7
 
-#include "Character.h"
-#include "Quest.h"
-#include "Skill.h"
-#include "Item.h"
-#include "ClassType.h"
+
 
 class Player : public Character
 {
