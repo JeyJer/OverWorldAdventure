@@ -1,12 +1,11 @@
 #include "Player.h"
-#include "ClassType.h"
-#include "ObjectList.h"
 
 Player::Player( std::string name, Statistic stat, ClassType classType )
     : Character(name, stat), m_classType(classType)
 {
     for( int i = 0; i < LENGTH_ITEM; ++i )
         this->m_stuff[i] = 0;
+    this->m_stuffNbr = 0;
 }
 
 Player::~Player()
@@ -35,6 +34,7 @@ void Player::wearStuff(int id)
         std::cout << "\nVous portez desormais l'item suivant : " << item->getName() << '\n';
         this->addStat( item );
         m_stuff[item->getTypeItem()] = item;
+        this->m_stuffNbr++;
     }
     else
     {
@@ -170,7 +170,13 @@ void Player::showState() const
     std::cout << "\nJe m'appelle " << this->m_name << ", je suis un " <<
          getStringClass(this->m_classType) << " et il me reste " << this->m_stat.life <<
          "PV et " <<this->m_stat.mana << "PM (Points Mana). Sinon je "
-         "t'imagine la tete dans un sac et le sac a l'arriere.\n";
+         "t'imagine la tete dans un sac et le sac a l'arriere.\nCaracteristiques :\n"
+         "Vitalite : " + typeToString<int>(this->m_stat.life) +
+         "\t\t| Mana : " + typeToString<int>(this->m_stat.mana) +
+         "\nAttaque Phys : " + typeToString<int>(this->m_stat.physicalAtt) +
+         "\t| Defense Phys : " + typeToString<int>(this->m_stat.physicalDef) +
+         "\nAttaque Magique : " + typeToString<int>(this->m_stat.magicalAtt) +
+         "\t| Defense Magique : " + typeToString<int>(this->m_stat.magicalDef) << "\n";
 }
 
 void Player::dispSkills() const
@@ -211,6 +217,11 @@ Item** Player::getStuff()
     return this->m_stuff;
 }
 
+ClassType Player::getClassType()
+{
+    return this->m_classType;
+}
+
 std::vector<Quest*> Player::getListQuestCurrent()
 {
     return this->m_lQuestCurrent;
@@ -224,4 +235,9 @@ std::vector<Quest*> Player::getListQuestFinished()
 std::vector<int> Player::getListSkill()
 {
     return this->m_lSkill;
+}
+
+bool Player::isFullStuff()
+{
+    return (this->m_stuffNbr == 7);
 }

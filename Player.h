@@ -4,19 +4,20 @@
 #include <iostream>
 #include <vector>
 
+#define LENGTH_ITEM 7
+
 #include "Character.h"
 #include "Quest.h"
 #include "Skill.h"
 #include "Item.h"
 #include "ClassType.h"
 
-#define LENGTH_ITEM 7
-
 class Player : public Character
 {
 private:
     ClassType m_classType;
     Item* m_stuff[7];
+    int m_stuffNbr;
     std::vector<int> m_lSkill;
     std::vector<Quest*> m_lQuestCurrent;
     std::vector<Quest*> m_lQuestFinished;
@@ -36,9 +37,11 @@ public:
     void dispStuff() const;
     void dispQuestJournal() const;
     Item** getStuff();
+    ClassType getClassType();
     std::vector<Quest*> getListQuestCurrent();
     std::vector<Quest*> getListQuestFinished();
     std::vector<int> getListSkill();
+    bool isFullStuff();
 };
 
 #endif // PLAYER_H_INCLUDED

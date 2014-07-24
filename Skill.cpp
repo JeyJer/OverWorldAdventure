@@ -13,13 +13,10 @@ Skill::~Skill()
 
 std::string Skill::disp() const
 {
-    std::stringstream sstm;
-    sstm << this->m_power;
-
     return "Nom : " + this->m_name +
         ", classe : " + getStringClass(this->m_classType) +
         ", effet : " + getStringEffect(this->m_skillEffect) +
-        ", puisssance : " + sstm.str();
+        ", puisssance : " + typeToString(this->m_power);
 }
 
 unsigned int Skill::getId()

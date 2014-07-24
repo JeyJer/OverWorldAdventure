@@ -6,6 +6,7 @@
 #include <string>
 
 #include "Utils.h"
+#include "ObjectList.h"
 
 enum RewardType
 {

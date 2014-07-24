@@ -54,4 +54,15 @@ void Character::attack(Character* character, int idSkill )
             std::cout << "TADADADAAAAMMM !!";
             std::exit(17);
     }
+
+}
+
+std::string Character::getName()
+{
+    return this->m_name;
+}
+
+Statistic Character::getStatistic()
+{
+    return this->m_stat;
 }

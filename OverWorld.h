@@ -6,10 +6,10 @@
 #include <cstdlib>
 #include <vector>
 
-#include "Character.h"
 #include "Mob.h"
 #include "Player.h"
 #include "ObjectList.h"
+#include "Character.h"
 #include "Quest.h"
 
 class OverWorld
@@ -19,6 +19,7 @@ private:
     void loadSkill();
     void loadItem();
     void loadQuest();
+    void loadMob();
 public:
     OverWorld();
     ~OverWorld();

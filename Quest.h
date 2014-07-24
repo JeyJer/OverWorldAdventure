@@ -3,8 +3,8 @@
 
 #include <string>
 
-#include "Reward.h"
 #include "Trigger.h"
+#include "Reward.h"
 
 class Quest
 {

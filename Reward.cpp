@@ -1,5 +1,4 @@
 #include "Reward.h"
-#include "ObjectList.h"
 
 std::string getStringReward( Reward reward )
 {

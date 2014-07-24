@@ -13,10 +13,12 @@ protected:
     std::string m_name;
     Statistic m_stat;
 public:
-    Character( std::string name, Statistic m_stat );
+    Character( std::string name, Statistic stat );
     virtual ~Character();
     virtual void addSkill(int id) = 0;
     void attack(Character* character, int idSkill );
+    std::string getName();
+    Statistic getStatistic();
 };
 
 #endif // CHARACTER_H_INCLUDED

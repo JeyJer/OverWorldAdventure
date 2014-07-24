@@ -46,7 +46,6 @@ OverWorld::OverWorld()
     }
 
     this->loadSkill();
-    this->loadItem();
     this->loadQuest();
 
     if( classChoice == 1 )
@@ -87,7 +86,8 @@ void OverWorld::loadSkill()
     );
     ObjectList::lSkill.push_back
     (
-        new Skill(2, "Ferveur de Soin", MAGICIAN, HEAL, 20, "Des doigts dans le cul repare les blessures.")
+        new Skill(2, "Ferveur de Soin", MAGICIAN, HEAL, 20,
+                  "Des doigts dans le cul repare les blessures.")
     );
 }
 
@@ -142,7 +142,7 @@ void OverWorld::loadItem()
     );
     ObjectList::lItem.push_back
     (
-        new Item(11, "Scepte de quietude inquietant", MAGICIAN, RIGHT, {0,100,0,0,25,0})
+        new Item(11, "Sceptre de quietude inquietant", MAGICIAN, RIGHT, {0,100,0,0,25,0})
     );
     ObjectList::lItem.push_back
     (
@@ -156,6 +156,7 @@ void OverWorld::loadItem()
 
 void OverWorld::loadQuest()
 {
+    ObjectList::lQuest.clear();
     ObjectList::lQuest.push_back
     (
         new Quest( 0, "Bonjour aventurier !! Pourrais-tu tuer Machin Le Trucmuche ?",
@@ -174,12 +175,27 @@ void OverWorld::loadQuest()
     );
 }
 
+void OverWorld::loadMob()
+{
+    ObjectList::lMob.push_back(
+        new Mob( "Morvaoman", {}, )
+    );
+}
+
 void OverWorld::run()
 {
+    this->loadItem();
+
     bool loopAgain = true;
     int action;
     do
     {
+        if( m_player->getStatistic().life <= 0 )
+        {
+            std::cout << '\n' << m_player->getName() << "est mort, sa vie est à 0...\n";
+            return;
+        }
+
         std::cout << "\nQue voulez-vous faire ?\n" <<
             "\t1. Se promener dans les bois (et t aC con pr y aler tt seul? bouffooooonn),\n" <<
             "\t2. Consulter l'etat de son personnage,\n" <<
@@ -201,7 +217,7 @@ void OverWorld::run()
             switch(action)
             {
                 case 1 :
-                    // TODO BASTOOOOOOOOOOOOOON
+                    nextRide( m_player );
                     break;
                 case 2 :
                     m_player->showState();
