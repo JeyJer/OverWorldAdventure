@@ -1,6 +1,12 @@
 #ifndef REWARD_H_INCLUDED
 #define REWARD_H_INCLUDED
 
+#include <iostream>
+#include <cstdlib>
+#include <string>
+
+#include "Utils.h"
+
 enum RewardType
 {
     LIFE = 0,
@@ -16,5 +22,7 @@ struct Reward
     RewardType rewardType;
     int value; // id or amount
 };
+
+std::string getStringReward( Reward reward );
 
 #endif // REWARD_H_INCLUDED

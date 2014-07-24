@@ -1,6 +1,11 @@
 #ifndef TRIGGER_H_INCLUDED
 #define TRIGGER_H_INCLUDED
 
+#include <iostream>
+#include <cstdlib>
+
+#include "Utils.h"
+
 enum Action
 {
     KILL_MOB = 0,
@@ -15,5 +20,7 @@ struct Trigger
     Action action;
     int value; // id or amount
 };
+
+std::string getStringTrigger( Trigger trigger );
 
 #endif // TRIGER_H_INCLUDED
