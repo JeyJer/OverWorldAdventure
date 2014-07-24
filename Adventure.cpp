@@ -6,7 +6,6 @@ void nextRide(Player* player)
 {
 
     int rand = getRandomNumber(0, 99);
-    std::cout << "\n[GAME] RAND = " << rand;
     if( rand <= 50 && !player->isFullStuff() )
     {
         std::cout << "\nVous trouvez un item au sol!!";
@@ -47,7 +46,6 @@ void nextRide(Player* player)
             }
             else
             {
-                std::cout << "\n[GAME] NBR = " << nbr;
                 continue;
             }
         } while( true );
@@ -81,7 +79,7 @@ void nextRide(Player* player)
         return;
         if( player->isFullStuff() )
         {
-            fight( player, 0 );
+            fight( player, ObjectList::lMob.at(0) );
         }
         else
         {
@@ -94,7 +92,6 @@ int getRandomNumber(int minimum, int maximum)
 {
     if( !isRandInit )
     {
-        std::cout << "\n[GAME SINGLETON] Init random...\n";
         srand(time(NULL));
         isRandInit = true;
     }
@@ -105,5 +102,33 @@ int getRandomNumber(int minimum, int maximum)
 
 void fight( Player* player, Mob* mob )
 {
-    // TODO BASTOOOOOOOOOOOOOOOOOOOOOOOOOOOON
+    do
+    {
+        // player attack
+        std::cout << "\nQuel sort voulez-vous utiliser ?\n";
+
+        for( unsigned int i = 0; i < player->getListSkill().size(); ++i )
+        {
+            std::cout << '\t' << (i+1) << ". " <<
+                ObjectList::lSkill.at( player->getListSkill().at(i) )->getName() << '\n';
+        }
+
+        unsigned int choice;
+        do
+        {
+            std::cin >> choice;
+
+            if( choice < 1 || choice >= player->getListSkill().size() )
+                std::cout << "\nNEIN NEIN NEIN !! MOI NAZI BRULER TOI !!!...\n";
+
+        } while( choice < 1 || choice >= player->getListSkill().size() );
+
+        player->attack( mob, ObjectList::lSkill.at(player->getListSkill().at(choice))->getId() );
+
+        if( mob->getStatistic().life > 0 )
+            mob->attack( player, mob->getSkill()->getId() );
+        else
+            break;
+
+    } while( player->getStatistic().life > 0 );
 }

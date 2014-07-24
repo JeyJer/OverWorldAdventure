@@ -11,7 +11,7 @@
 class Skill
 {
 private:
-    unsigned int m_id;
+    int m_id;
     std::string m_name;
     ClassType m_classType;
     SkillEffect m_skillEffect;
@@ -22,7 +22,7 @@ public:
           unsigned int power, std::string punchline );
     ~Skill();
     std::string disp() const;
-    unsigned int getId();
+    int getId();
     std::string getName();
     ClassType getClassType();
     SkillEffect getSkillEffect();

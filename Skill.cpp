@@ -19,7 +19,7 @@ std::string Skill::disp() const
         ", puisssance : " + typeToString(this->m_power);
 }
 
-unsigned int Skill::getId()
+int Skill::getId()
 {
     return this->m_id;
 }

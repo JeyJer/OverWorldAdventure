@@ -177,8 +177,72 @@ void OverWorld::loadQuest()
 
 void OverWorld::loadMob()
 {
-    ObjectList::lMob.push_back(
-        new Mob( "Morvaoman", {}, )
+    ObjectList::lMob.push_back
+    (
+        new Mob
+        (
+            "Morvaoman", {10000,0,250,400,250,400},
+                new Skill
+                (
+                    0, "Morve Atomique", MAGICIAN, MAG_ATT, 20,
+                    "Morvaoman vous eternue dessus, vous vous transformer en une grosse boule "
+                    "de morve radioactive et vous perdez le contrôle de votre personnage..."
+                ),
+            Reward(LIFE,1000)
+        )
+    );
+    ObjectList::lMob.push_back
+    (
+        new Mob
+        (
+            "Reuno", {100,0,20,20,20,20},
+                new Skill
+                (
+                    0, "Tremblement de terre", WARRIOR, PHYS_ATT, 5,
+                    "Reuno pousse une gueulante et provoque un tremblement de Terre"
+                ),
+            Reward(LIFE,20)
+        )
+    );
+    ObjectList::lMob.push_back
+    (
+        new Mob
+        (
+            "Bill Gates", {5,0,1,1,1,1},
+                new Skill
+                (
+                    0, "ERROR 404", MAGICIAN, MAG_ATT, 1,
+                    "Bill Gates plante et tente de vous enterrer..."
+                ),
+            Reward(LIFE,10)
+        )
+    );
+    ObjectList::lMob.push_back
+    (
+        new Mob
+        (
+            "Delecluse", {200,0,5,40,0,0},
+                new Skill
+                (
+                    0, "Plongeons mortel", WARRIOR, PHYS_ATT, 20,
+                    "Delecluse saute sur vous alors que vous passiez sous la Tour Eiffel..."
+                ),
+            Reward(ITEM,3)
+        )
+    );
+    ObjectList::lMob.push_back
+    (
+        new Mob
+        (
+            "Ortiz", {200,0,0,0,20,50},
+                new Skill
+                (
+                    0, "2 >= 4", MAGICIAN, MAG_ATT, 20,
+                    "Ortiz défie toute logique et vous inflige des dégâts par la puissance "
+                    "mystifiante des fractales."
+                ),
+            Reward(DEFENSE,3)
+        )
     );
 }
 

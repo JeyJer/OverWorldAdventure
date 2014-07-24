@@ -2,9 +2,8 @@
 #define MOB_H_INCLUDED
 
 #include "Item.h"
+#include "Reward.h"
 #include "Character.h"
-
-class Reward;
 
 class Mob : public Character
 {
