@@ -10,7 +10,7 @@
 class ObjectList
 {
 public:
-    static std::vector<Skill> lSkill;
+    static std::vector<Skill*> lSkill;
     static std::vector<Item*> lItem;
     static std::vector<Quest*> lQuest;
 };
