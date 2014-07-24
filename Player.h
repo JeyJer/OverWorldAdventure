@@ -28,7 +28,7 @@ public:
     ~Player();
     void addSkill(int id);
     void wearStuff(int id);
-    bool canWearItem(int id);
+    bool inline canWearItem(int id);
     void addQuest(Quest* quest);
     void finishQuest(Quest* quest);
     void showState() const;

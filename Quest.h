@@ -18,6 +18,7 @@ private:
 public:
     Quest( int id, std::string intro, std::string sumUp, std::string endUp, Reward reward, Trigger trigger );
     ~Quest();
+    std::string disp(bool isDone);
     int getId();
     std::string getIntro();
     std::string getSumUp();

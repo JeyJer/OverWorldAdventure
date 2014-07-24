@@ -9,6 +9,12 @@ Quest::~Quest()
 {
 }
 
+std::string Quest::disp( bool isDone )
+{
+    return this->m_sumUp + "\nRequiert : " + getStringTrigger(this->m_trigger) +
+        ((isDone) ? "\nRecompense : " + getStringReward(this->m_reward) : "") + '\n';
+}
+
 int Quest::getId()
 {
     return this->m_id;

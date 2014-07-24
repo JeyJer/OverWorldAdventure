@@ -158,7 +158,7 @@ void OverWorld::loadQuest()
                   "Avoir plus de 100PV.", "Je m'incline... Tu as plus de vie que moi..."
                   "Pour la peine, laisse-moi t'offrir le reste de ma vie... *l'Homme meurt"
                   "en vous laissant aspirer ses 150 points de vitalite..." ,
-                  Reward(LIFE,150), Trigger(MORE_LIFE,0)
+                  Reward(LIFE,150), Trigger(MORE_LIFE,101)
         )
     );
 }

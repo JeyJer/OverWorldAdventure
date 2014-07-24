@@ -70,7 +70,7 @@ void Player::wearStuff(int id)
     }
 }
 
-bool Player::canWearItem(int id)
+bool inline Player::canWearItem(int id)
 {
     return (ObjectList::lItem.at(id)->getClassType() != this->m_classType);
 }
@@ -98,7 +98,7 @@ void Player::removeStat(Item* item)
 void Player::addQuest(Quest* quest)
 {
     this->m_lQuestCurrent.push_back( quest );
-    std::cout << "\nNouvelle quete debutee!!\n";
+    std::cout << "\nNouvelle quete debutee!\n";
 }
 
 void Player::finishQuest(Quest* quest)
@@ -109,6 +109,7 @@ void Player::finishQuest(Quest* quest)
         if( this->m_lQuestCurrent.at(i)->getId() == quest->getId() )
         {
             found = true;
+            this->m_lQuestFinished.push_back( quest );
             this->m_lQuestCurrent.erase( m_lQuestCurrent.begin() + i);
             break;
         }
@@ -120,7 +121,7 @@ void Player::finishQuest(Quest* quest)
             "Ca va chier... ### ? " << quest->getId();
             std::exit( 13 );
     }
-
+    std::cout << "\nQuete achevee! Recompense : ";
     this->getQuestReward( quest );
 
 }
@@ -131,19 +132,23 @@ void Player::getQuestReward(Quest* quest)
     {
         case LIFE :
             this->m_stat.life += quest->getReward().value;
+            std::cout << "gain de vie!\n";
             break;
 
         case ATTACK :
             this->m_stat.magicalAtt += quest->getReward().value;
             this->m_stat.physicalAtt += quest->getReward().value;
+            std::cout << "gain d'attaque!\n";
             break;
 
         case DEFENSE :
             this->m_stat.magicalDef += quest->getReward().value;
             this->m_stat.physicalDef += quest->getReward().value;
+            std::cout << "gain de defense!\n";
             break;
 
         case ITEM :
+            std::cout << "gain d'item!\n";
             if( !canWearItem(quest->getReward().value) )
             {
                 this->wearStuff(quest->getReward().value+7);
@@ -182,12 +187,23 @@ void Player::dispStuff() const
 {
     std::cout << "\nItems portes : \n";
     for( int i = 0; i < LENGTH_ITEM; ++i )
-        std::cout << '\n' << this->m_stuff[i]->disp() << '\n';
+    {
+        if( this->m_stuff[i] != 0 )
+        {
+            std::cout << '\n' << this->m_stuff[i]->disp() << '\n';
+        }
+    }
 }
 
 void Player::dispQuestJournal() const
 {
+    std::cout << "\nQuetes en cours :\n";
+    for( unsigned int i = 0; i < this->m_lQuestCurrent.size(); ++i )
+        std::cout << this->m_lQuestCurrent.at(i)->disp( false ) << '\n';
 
+    std::cout << "\nQuetes finies :\n";
+    for( unsigned int i = 0; i < this->m_lQuestFinished.size(); ++i )
+        std::cout << this->m_lQuestFinished.at(i)->disp( true ) << '\n';
 }
 
 Item** Player::getStuff()

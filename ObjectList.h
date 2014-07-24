@@ -3,9 +3,9 @@
 
 #include <vector>
 
+#include "Quest.h"
 #include "Skill.h"
 #include "Item.h"
-#include "Quest.h"
 
 class ObjectList
 {

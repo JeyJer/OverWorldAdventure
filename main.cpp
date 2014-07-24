@@ -17,13 +17,13 @@ int main()
     {
         do
         {
-            std::cout << "Faites 1 puis faites entrer (fais pas 2 abruti!!)\n" <<
+            std::cout << "\nFaites 1 puis faites entrer (fais pas 2 abruti!!)\n" <<
                 "\t1. Nouvelle partie\n" <<
                 "\t2. Quitter\n";
             std::cin >> choice;
 
             if( choice != 1 && choice != 2 )
-                std::cout << "Veuillez choisir l'option 1 ou 2, fils de pute.";
+                std::cout << "\nVeuillez choisir l'option 1 ou 2, fils de pute.\n";
 
         } while( choice != 1 && choice != 2 );
 
@@ -39,7 +39,7 @@ int main()
             }
 
             case 2 :
-                std::cout << "Merci d'avoir joue sur OverWorld Adventure!!\n";
+                std::cout << "\nMerci d'avoir joue sur OverWorld Adventure!!\n";
                 return 0;
 
             default :
