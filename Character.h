@@ -2,8 +2,10 @@
 #define CHARACTER_H_INCLUDED
 
 #include <string>
+#include <cstdlib>
 
 #include "Statistic.h"
+#include "ObjectList.h"
 
 class Character
 {
@@ -14,6 +16,7 @@ public:
     Character( std::string name, Statistic m_stat );
     virtual ~Character();
     virtual void addSkill(int id) = 0;
+    void attack(Character* character, int idSkill );
 };
 
 #endif // CHARACTER_H_INCLUDED

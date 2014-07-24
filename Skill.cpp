@@ -1,7 +1,9 @@
 #include "Skill.h"
 
-Skill::Skill( int id, std::string name, ClassType classType, SkillEffect skillEffect, unsigned int power )
-    : m_id( id ), m_name( name ), m_classType( classType ), m_skillEffect( skillEffect ), m_power( power )
+Skill::Skill( int id, std::string name, ClassType classType, SkillEffect skillEffect,
+             unsigned int power, std::string punchline )
+    : m_id( id ), m_name( name ), m_classType( classType ), m_skillEffect( skillEffect ),
+        m_power( power ), m_punchline( punchline )
 {
 }
 
@@ -43,4 +45,9 @@ SkillEffect Skill::getSkillEffect()
 unsigned int Skill::getPower()
 {
     return this->m_power;
+}
+
+std::string Skill::getPunchline()
+{
+    return this->m_punchline;
 }

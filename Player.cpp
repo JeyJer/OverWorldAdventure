@@ -18,7 +18,7 @@ void Player::addSkill(int id)
     this->m_lSkill.push_back( id );
 
     std::cout << "\nFelicitation !! Vous venez d'apprendre un nouveau sort !!\n\t" <<
-        ObjectList::lSkill.at(id).getName() << ".\n";
+        ObjectList::lSkill.at(id)->getName() << ".\n";
 }
 
 void Player::wearStuff(int id)
@@ -178,7 +178,7 @@ void Player::dispSkills() const
     std::cout << "\nSorts :";
     for( unsigned int i = 0; i < this->m_lSkill.size(); ++i )
     {
-        std::cout << "\n\t" << ObjectList::lSkill.at( this->m_lSkill.at(i) ).disp();
+        std::cout << "\n\t" << ObjectList::lSkill.at( this->m_lSkill.at(i) )->disp();
     }
     std::cout << '\n';
 }

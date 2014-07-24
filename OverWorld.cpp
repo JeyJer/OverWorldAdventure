@@ -75,9 +75,20 @@ OverWorld::~OverWorld()
 
 void OverWorld::loadSkill()
 {
-    ObjectList::lSkill.push_back( Skill(0, "Fracasse-Crane", WARRIOR, MAG_ATT, 5) );
-    ObjectList::lSkill.push_back( Skill(1, "Colere de tempete", MAGICIAN, MAG_ATT, 10) );
-    ObjectList::lSkill.push_back( Skill(2, "Ferveur de soin", MAGICIAN, HEAL, 20) );
+    ObjectList::lSkill.push_back
+    (
+        new Skill(0, "Fracasse-Crane", WARRIOR, PHYS_ATT, 5,
+                  "Vous etes eclabousse par la cervelle de votre ennemi.")
+    );
+    ObjectList::lSkill.push_back
+    (
+        new Skill(1, "Colere de Tempete", MAGICIAN, MAG_ATT, 10,
+                  "Des eclairs dechirent les oceans et des tornades ravagent la Terre.")
+    );
+    ObjectList::lSkill.push_back
+    (
+        new Skill(2, "Ferveur de Soin", MAGICIAN, HEAL, 20, "Des doigts dans le cul repare les blessures.")
+    );
 }
 
 void OverWorld::loadItem()
