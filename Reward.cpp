@@ -1,4 +1,9 @@
+#include <iostream>
+#include <cstdlib>
+
 #include "Reward.h"
+#include "ObjectList.h"
+#include "Utils.h"
 
 std::string getStringReward( Reward reward )
 {

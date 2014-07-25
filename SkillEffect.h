@@ -1,9 +1,7 @@
 #ifndef SKILLEFFECT_H_INCLUDED
 #define SKILLEFFECT_H_INCLUDED
 
-#include <iostream>
 #include <string>
-#include <cstdlib>
 
 enum SkillEffect
 {

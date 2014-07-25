@@ -2,8 +2,9 @@
 #define CHARACTER_H_INCLUDED
 
 #include <string>
-#include <cstdlib>
 
+#include "Statistic.h"
+#include "Skill.h"
 
 class Character
 {
@@ -15,6 +16,7 @@ public:
     virtual ~Character();
     virtual void addSkill(int id) = 0;
     void attack(Character* character, int idSkill );
+    void attack(Character* character, Skill* skill );
     std::string getName();
     Statistic getStatistic();
 };

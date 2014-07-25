@@ -1,11 +1,7 @@
 #ifndef REWARD_H_INCLUDED
 #define REWARD_H_INCLUDED
 
-#include <iostream>
-#include <cstdlib>
 #include <string>
-
-
 
 enum RewardType
 {

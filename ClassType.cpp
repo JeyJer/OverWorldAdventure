@@ -1,3 +1,6 @@
+#include <iostream>
+#include <cstdlib>
+
 #include "ClassType.h"
 
 std::string getStringClass( unsigned int idEffect )

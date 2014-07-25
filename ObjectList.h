@@ -3,7 +3,10 @@
 
 #include <vector>
 
-
+#include "Item.h"
+#include "Skill.h"
+#include "Mob.h"
+#include "Quest.h"
 
 class ObjectList
 {

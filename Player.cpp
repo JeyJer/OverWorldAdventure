@@ -1,4 +1,12 @@
+#include <cstdlib>
+#include <iostream>
+#include <string>
+
 #include "Player.h"
+#include "Utils.h"
+#include "Reward.h"
+#include "Skill.h"
+#include "ObjectList.h"
 
 Player::Player( std::string name, Statistic stat, ClassType classType )
     : Character(name, stat), m_classType(classType)
@@ -33,7 +41,7 @@ void Player::wearStuff(int id)
     {
         std::cout << "\nVous portez desormais l'item suivant : " << item->getName() << '\n';
         this->addStat( item );
-        m_stuff[item->getTypeItem()] = item;
+        this->m_stuff[item->getTypeItem()] = item;
         this->m_stuffNbr++;
     }
     else
@@ -121,34 +129,36 @@ void Player::finishQuest(Quest* quest)
             "Ca va chier... ### ? " << quest->getId();
             std::exit( 13 );
     }
-    std::cout << "\nQuete achevee! Recompense : ";
     this->getQuestReward( quest );
 
 }
 
 void Player::getQuestReward(Quest* quest)
 {
+    std::cout << "\nVous achevez une quete ! Vous remplissez ses conditions : " <<
+        getStringTrigger( quest->getTrigger() ) << '\n';
+
     switch( quest->getReward().rewardType )
     {
         case LIFE :
             this->m_stat.life += quest->getReward().value;
-            std::cout << "gain de vie!\n";
+            std::cout << "Gain de vie! (+" << quest->getReward().value << "PV).\n";
             break;
 
         case ATTACK :
             this->m_stat.magicalAtt += quest->getReward().value;
             this->m_stat.physicalAtt += quest->getReward().value;
-            std::cout << "gain d'attaque!\n";
+            std::cout << "Gain d'attaque! (+" << quest->getReward().value << "Att).\n";
             break;
 
         case DEFENSE :
             this->m_stat.magicalDef += quest->getReward().value;
             this->m_stat.physicalDef += quest->getReward().value;
-            std::cout << "gain de defense!\n";
+            std::cout << "Gain de defense! (+" << quest->getReward().value << "Def).\n";
             break;
 
         case ITEM :
-            std::cout << "gain d'item!\n";
+            std::cout << "Gain d'item!\n";
             if( !canWearItem(quest->getReward().value) )
             {
                 this->wearStuff(quest->getReward().value+7);
@@ -182,10 +192,10 @@ void Player::showState() const
 void Player::dispSkills() const
 {
     std::cout << "\nSorts :";
+
     for( unsigned int i = 0; i < this->m_lSkill.size(); ++i )
-    {
         std::cout << "\n\t" << ObjectList::lSkill.at( this->m_lSkill.at(i) )->disp();
-    }
+
     std::cout << '\n';
 }
 
@@ -210,6 +220,33 @@ void Player::dispQuestJournal() const
     std::cout << "\nQuetes finies :\n";
     for( unsigned int i = 0; i < this->m_lQuestFinished.size(); ++i )
         std::cout << this->m_lQuestFinished.at(i)->disp( true ) << '\n';
+}
+
+std::string Player::getDrop(Reward reward)
+{
+    switch( reward.rewardType )
+    {
+        case LIFE :
+            this->m_stat.life += reward.value;
+            return "+" + typeToString<int>(reward.value) + "PV.\n";
+        case ITEM :
+            if( this->m_classType == 2 )
+                reward.value += 7;
+            std::cout << "Un item !!\n";
+            this->wearStuff(reward.value);
+            return "";
+        case ATTACK :
+            this->m_stat.physicalAtt += reward.value;
+            this->m_stat.magicalAtt += reward.value;
+            return "+" + typeToString<int>(reward.value) + " Att.\n";
+        case DEFENSE :
+            this->m_stat.physicalAtt += reward.value;
+            this->m_stat.magicalAtt += reward.value;
+            return "+" + typeToString<int>(reward.value) + " Def.\n";
+        default :
+            std::cout << "MOTHER FUCKING DROP...";
+            std::exit( 16 );
+    }
 }
 
 Item** Player::getStuff()

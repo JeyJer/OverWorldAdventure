@@ -1,16 +1,15 @@
 #ifndef SKILL_H_INCLUDED
 #define SKILL_H_INCLUDED
 
-#include <iostream>
 #include <string>
-#include <sstream>
 
-
+#include "ClassType.h"
+#include "SkillEffect.h"
 
 class Skill
 {
 private:
-    int m_id;
+    unsigned int m_id;
     std::string m_name;
     ClassType m_classType;
     SkillEffect m_skillEffect;
@@ -21,7 +20,7 @@ public:
           unsigned int power, std::string punchline );
     ~Skill();
     std::string disp() const;
-    int getId();
+    unsigned int getId();
     std::string getName();
     ClassType getClassType();
     SkillEffect getSkillEffect();

@@ -1,3 +1,6 @@
+#include <iostream>
+#include <cstdlib>
+
 #include "SkillEffect.h"
 
 std::string getStringEffect( unsigned int idEffect )

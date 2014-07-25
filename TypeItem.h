@@ -1,9 +1,7 @@
 #ifndef TYPEITEM_H_INCLUDED
 #define TYPEITEM_H_INCLUDED
 
-#include <iostream>
 #include <string>
-#include <cstdlib>
 
 enum TypeItem
 {

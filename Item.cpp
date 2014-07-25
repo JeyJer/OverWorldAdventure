@@ -1,4 +1,5 @@
 #include "Item.h"
+#include "Utils.h"
 
 Item::Item( int id, std::string name, ClassType classType, TypeItem typeItem, Statistic stat )
     : m_id( id ), m_name( name ), m_classType( classType ), m_typeItem( typeItem ), m_stat( stat )

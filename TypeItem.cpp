@@ -1,5 +1,8 @@
 #include "TypeItem.h"
 
+#include <iostream>
+#include <cstdlib>
+
 std::string getStringTypeItem( TypeItem typeItem )
 {
     switch( typeItem )

@@ -1,4 +1,12 @@
+#include <cstdlib>
+#include <ctime>
+#include <iostream>
+
 #include "Adventure.h"
+#include "ClassType.h"
+#include "ObjectList.h"
+#include "Reward.h"
+#include "Trigger.h"
 
 bool isRandInit = false;
 
@@ -6,7 +14,7 @@ void nextRide(Player* player)
 {
 
     int rand = getRandomNumber(0, 99);
-    if( rand <= 50 && !player->isFullStuff() )
+    if( rand <= 49 && !player->isFullStuff() )
     {
         std::cout << "\nVous trouvez un item au sol!!";
         int minimum, maximum;
@@ -50,7 +58,7 @@ void nextRide(Player* player)
             }
         } while( true );
     }
-    else if( rand > 51 && rand <= 80 && ObjectList::lQuest.size() > 0 && !player->isFullStuff() )
+    else if( rand > 50 && rand <= 90 && ObjectList::lQuest.size() > 0 && !player->isFullStuff() )
     {
         std::cout << "\n*Une quete se presente a vous...*\n\n";
         int questIndex = getRandomNumber(0, (int)ObjectList::lQuest.size()-1);
@@ -76,14 +84,13 @@ void nextRide(Player* player)
     }
     else
     {
-        return;
         if( player->isFullStuff() )
         {
-            fight( player, ObjectList::lMob.at(0) );
+            fight( player, *ObjectList::lMob.at( 0 ) );
         }
         else
         {
-            fight( player, ObjectList::lMob.at(getRandomNumber( 1, (int)ObjectList::lMob.size()-1 )) );
+            fight( player, *ObjectList::lMob.at(getRandomNumber( 1, (int)ObjectList::lMob.size()-1 )) );
         }
     }
 }
@@ -100,8 +107,9 @@ int getRandomNumber(int minimum, int maximum)
     return (rand() % (maximum-minimum) + minimum );
 }
 
-void fight( Player* player, Mob* mob )
+void fight( Player* player, Mob mob )
 {
+    std::cout << "\nUn " << mob.getName() << " sauvage apparait !!\n";
     do
     {
         // player attack
@@ -118,17 +126,54 @@ void fight( Player* player, Mob* mob )
         {
             std::cin >> choice;
 
-            if( choice < 1 || choice >= player->getListSkill().size() )
+            if( choice < 1 || choice > player->getListSkill().size() )
                 std::cout << "\nNEIN NEIN NEIN !! MOI NAZI BRULER TOI !!!...\n";
 
-        } while( choice < 1 || choice >= player->getListSkill().size() );
+        } while( choice < 1 || choice > player->getListSkill().size() );
+        choice--;
 
-        player->attack( mob, ObjectList::lSkill.at(player->getListSkill().at(choice))->getId() );
+        std::cout << "\nQuelle est votre cible ?\n"
+            "\t1. Le monstre,\n\t2. Vous\n";
 
-        if( mob->getStatistic().life > 0 )
-            mob->attack( player, mob->getSkill()->getId() );
+        unsigned int choice2;
+        do
+        {
+            std::cin >> choice2;
+
+            if( choice2 != 1 && choice2 != 2 )
+                std::cout << "\nNEIN NEIN NEIN !! MOI NAZI BRULER TOI !!!...\n";
+
+        } while( choice2 != 1 && choice2 != 2 );
+
+        if( choice2 == 2 )
+        {
+            player->attack( player, ObjectList::lSkill.at(player->getListSkill().at( choice ))->getId() );
+        }
+        else
+        {
+            player->attack( &mob, ObjectList::lSkill.at(player->getListSkill().at( choice ))->getId() );
+        }
+
+        if( mob.getStatistic().life > 0 )
+            mob.attack( player, mob.getSkill() );
         else
             break;
 
     } while( player->getStatistic().life > 0 );
+
+    if( player->getStatistic().life <= 0 )
+    {
+        std::cout << "\nVous etes mort....\n";
+    }
+    else
+    {
+        std::cout << '\n';
+        std::cout << mob.getName();
+        std::cout << " est mort !! Bravo, pour une fois que t'arrives a qqchs !!\n\n";
+        std::cout << "Vous droppez qqchs...\n";
+        std::cout << player->getDrop( mob.getReward() );
+        std::cout << '\n';
+
+        checkKillMobAction( player, mob );
+    }
 }

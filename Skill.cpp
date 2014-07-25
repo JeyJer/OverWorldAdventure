@@ -1,4 +1,5 @@
 #include "Skill.h"
+#include "Utils.h"
 
 Skill::Skill( int id, std::string name, ClassType classType, SkillEffect skillEffect,
              unsigned int power, std::string punchline )
@@ -19,7 +20,7 @@ std::string Skill::disp() const
         ", puisssance : " + typeToString(this->m_power);
 }
 
-int Skill::getId()
+unsigned int Skill::getId()
 {
     return this->m_id;
 }

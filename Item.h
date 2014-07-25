@@ -2,10 +2,10 @@
 #define ITEM_H_INCLUDED
 
 #include <string>
-#include <iomanip>
-#include <cstdlib>
 
-
+#include "Statistic.h"
+#include "ClassType.h"
+#include "TypeItem.h"
 
 class Item
 {

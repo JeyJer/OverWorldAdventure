@@ -1,5 +1,21 @@
 #include "OverWorld.h"
 
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include <vector>
+
+#include "Statistic.h"
+#include "ClassType.h"
+#include "SkillEffect.h"
+#include "Reward.h"
+#include "Trigger.h"
+#include "Quest.h"
+#include "Skill.h"
+#include "Item.h"
+#include "ObjectList.h"
+#include "Adventure.h"
+
 OverWorld::OverWorld()
 {
     std::cout << "\nChoisissez un nom de personnage...\n";
@@ -11,7 +27,7 @@ OverWorld::OverWorld()
     {
         std::cout << "\nSelectionnez une classe...\n" <<
             "\t1. Guerrier\n" <<
-            "\t2. Magicien\n";
+            "\t2. Magicien (classe Ch3@t)\n";
         std::cin >> classChoice;
 
         if( classChoice != 1 && classChoice != 2 )
@@ -47,6 +63,7 @@ OverWorld::OverWorld()
 
     this->loadSkill();
     this->loadQuest();
+    this->loadMob();
 
     if( classChoice == 1 )
     {
@@ -134,7 +151,7 @@ void OverWorld::loadItem()
     );
     ObjectList::lItem.push_back
     (
-        new Item(9, "Chaussons en poils de couilles", MAGICIAN, BOOTS, {30,100,0,5,5,15})
+        new Item(9, "Chaussons en poils de testicouilles", MAGICIAN, BOOTS, {30,100,0,5,5,15})
     );
     ObjectList::lItem.push_back
     (
@@ -161,15 +178,17 @@ void OverWorld::loadQuest()
     (
         new Quest( 0, "Bonjour aventurier !! Pourrais-tu tuer Machin Le Trucmuche ?",
                   "Tuez Machin Le Trucmuche.", "Merci d'avoir tue Machin Le Trucmuche !!",
-                  Reward(ATTACK,20), Trigger(KILL_MOB,0)
+                  Reward(ATTACK,20), Trigger(KILL_MOB,5)
         )
     );
     ObjectList::lQuest.push_back
     (
         new Quest( 1, "Bonjour aventurier !! Tu n'auras jamais plus de PV que 101 !",
-                  "Avoir plus de 100PV.", "Je m'incline... Tu as plus de vie que moi..."
+                  "Relever le defi de l'autre putain de connnnarrrrd de merdeeee et "
+                  "ouiiii c'est plus Tuurookkk c'est plus corrrpss a corps",
+                  "Je m'incline... Tu as plus de vie que moi..."
                   "Pour la peine, laisse-moi t'offrir le reste de ma vie... *l'Homme meurt"
-                  "en vous laissant aspirer ses 150 points de vitalite..." ,
+                  "en vous laissant pomper ses 150 points de vitalite... Cochon..." ,
                   Reward(LIFE,150), Trigger(MORE_LIFE,101)
         )
     );
@@ -181,12 +200,12 @@ void OverWorld::loadMob()
     (
         new Mob
         (
-            "Morvaoman", {10000,0,250,400,250,400},
+            0, "Morvaoman", {10000,0,587971,400,587971,400},
                 new Skill
                 (
                     0, "Morve Atomique", MAGICIAN, MAG_ATT, 20,
-                    "Morvaoman vous eternue dessus, vous vous transformer en une grosse boule "
-                    "de morve radioactive et vous perdez le contrôle de votre personnage..."
+                    "Morvaoman vous eternue dessus, vous vous transforme en une grosse boule "
+                    "de morve radioactive et vous perdez le controle de votre personnage..."
                 ),
             Reward(LIFE,1000)
         )
@@ -195,7 +214,7 @@ void OverWorld::loadMob()
     (
         new Mob
         (
-            "Reuno", {100,0,20,20,20,20},
+            1, "Reuno", {100,0,20,20,20,20},
                 new Skill
                 (
                     0, "Tremblement de terre", WARRIOR, PHYS_ATT, 5,
@@ -208,7 +227,7 @@ void OverWorld::loadMob()
     (
         new Mob
         (
-            "Bill Gates", {5,0,1,1,1,1},
+            2, "Bill Gates", {5,0,1,1,1,1},
                 new Skill
                 (
                     0, "ERROR 404", MAGICIAN, MAG_ATT, 1,
@@ -221,11 +240,11 @@ void OverWorld::loadMob()
     (
         new Mob
         (
-            "Delecluse", {200,0,5,40,0,0},
+            3, "Delecluse", {200,0,5,40,0,0},
                 new Skill
                 (
                     0, "Plongeons mortel", WARRIOR, PHYS_ATT, 20,
-                    "Delecluse saute sur vous alors que vous passiez sous la Tour Eiffel..."
+                    "Delecluse saute sur vous du haut de la Tour Eiffel alors que vous passiez dessous..."
                 ),
             Reward(ITEM,3)
         )
@@ -234,16 +253,29 @@ void OverWorld::loadMob()
     (
         new Mob
         (
-            "Ortiz", {200,0,0,0,20,50},
+            4, "Ortiz", {200,0,0,0,20,50},
                 new Skill
                 (
                     0, "2 >= 4", MAGICIAN, MAG_ATT, 20,
-                    "Ortiz défie toute logique et vous inflige des dégâts par la puissance "
-                    "mystifiante des fractales."
+                    "Ortiz defie toute logique et vous inflige des degats par la puissance "
+                    "mystifiante de la fonction exponentielle appliquée aux fractales."
                 ),
             Reward(DEFENSE,3)
         )
-    );
+     );
+    ObjectList::lMob.push_back
+    (
+        new Mob
+        (
+            5, "Machin Le Trucmuche", {300,0,0,0,30,60},
+                new Skill
+                (
+                    0, "Bidule", MAGICIAN, MAG_ATT, 20,
+                    "Chose chouette machin trucmuche trololol SWAGGG prout EXPLTDRRRR"
+                ),
+            Reward(DEFENSE,3)
+        )
+     );
 }
 
 void OverWorld::run()
@@ -256,9 +288,11 @@ void OverWorld::run()
     {
         if( m_player->getStatistic().life <= 0 )
         {
-            std::cout << '\n' << m_player->getName() << "est mort, sa vie est à 0...\n";
+            std::cout << "Retour au menu principal...\n";
             return;
         }
+
+        checkLifeAction( this->m_player );
 
         std::cout << "\nQue voulez-vous faire ?\n" <<
             "\t1. Se promener dans les bois (et t aC con pr y aler tt seul? bouffooooonn),\n" <<

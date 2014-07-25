@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 
 #include "OverWorld.h"
 
@@ -31,10 +32,8 @@ int main()
         {
             case 1 :
             {
-                OverWorld* ow = new OverWorld;
-                ow->run();
-                delete ow;
-                ow = 0;
+                OverWorld ow;
+                ow.run();
                 break;
             }
 

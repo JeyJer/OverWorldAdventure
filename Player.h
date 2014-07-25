@@ -1,12 +1,15 @@
 #ifndef PLAYER_H_INCLUDED
 #define PLAYER_H_INCLUDED
 
-#include <iostream>
-#include <vector>
-
 #define LENGTH_ITEM 7
 
+#include <vector>
 
+#include "ClassType.h"
+#include "Statistic.h"
+#include "Character.h"
+#include "Quest.h"
+#include "Item.h"
 
 class Player : public Character
 {
@@ -33,6 +36,7 @@ public:
     void dispStuff() const;
     void dispQuestJournal() const;
     Item** getStuff();
+    std::string getDrop(Reward reward);
     ClassType getClassType();
     std::vector<Quest*> getListQuestCurrent();
     std::vector<Quest*> getListQuestFinished();

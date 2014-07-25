@@ -1,8 +1,10 @@
 #ifndef TRIGGER_H_INCLUDED
 #define TRIGGER_H_INCLUDED
 
-#include <iostream>
-#include <cstdlib>
+#include <string>
+
+class Player;
+class Mob;
 
 enum Action
 {
@@ -19,6 +21,8 @@ struct Trigger
     int value; // id or amount
 };
 
+void checkKillMobAction( Player* player, Mob& mob );
+void checkLifeAction( Player* player );
 std::string getStringTrigger( Trigger trigger );
 
 #endif // TRIGER_H_INCLUDED
